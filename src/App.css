@@ -1,0 +1,4 @@
+
+body {
+  @apply bg-gradient-to-b from-gray-900 to-purple-900 min-h-screen;
+}
