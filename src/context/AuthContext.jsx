@@ -1,7 +1,6 @@
 import { createContext, useContext, useState, useEffect } from 'react';
-import { auth, db } from '../services/firebase';
+import { auth } from '../services/firebase';
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged, signOut } from 'firebase/auth';
-import { collection, addDoc, getDocs, query, where } from 'firebase/firestore';
 
 const AuthContext = createContext();
 
@@ -25,25 +24,6 @@ export function AuthProvider({ children }) {
     return signOut(auth);
   };
 
-  const saveExpenses = async (expenses) => {
-    if (currentUser) {
-      await addDoc(collection(db, "expenses"), {
-        ...expenses,
-        userId: currentUser.uid,
-        createdAt: new Date()
-      });
-    }
-  };
-
-  const getExpenses = async () => {
-    if (currentUser) {
-      const q = query(collection(db, "expenses"), where("userId", "==", currentUser.uid));
-      const querySnapshot = await getDocs(q);
-      return querySnapshot.docs.map(doc => doc.data());
-    }
-    return [];
-  };
-
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setCurrentUser(user);
@@ -58,8 +38,6 @@ export function AuthProvider({ children }) {
     login,
     register,
     logout,
-    saveExpenses,
-    getExpenses
   };
 
   return (
