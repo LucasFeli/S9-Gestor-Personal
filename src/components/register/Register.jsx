@@ -10,27 +10,44 @@ export const Register = () => {
   const { register } = useAuth();
   const navigate = useNavigate();
 
+  const validateEmail = (email) => {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  };
+
+  const validatePassword = (password) => {
+    return password.length >= 8;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!validateEmail(email)) {
+      return setError('El formato del email no es válido.');
+    }
+    if (!validatePassword(password)) {
+      return setError('La contraseña debe tener al menos 8 caracteres.');
+    }
     if (password !== confirmPassword) {
-      return setError('Passwords do not match');
+      return setError('Las contraseñas no coinciden.');
     }
     setError('');
     try {
       await register(email, password);
+      console.log("User registered")
       navigate('/dashboard');
     } catch (error) {
-      setError('Failed to create an account');
-     
+      if (error.code === 'auth/email-already-in-use') {
+        setError('El email ya está en uso.');
+      } else if (error.code === 'auth/configuration-not-found') {
+        setError('Error en la configuración de Firebase.');
+      } else {
+        setError('Error al crear la cuenta. Por favor, inténtalo de nuevo.');
+      }
     }
-    setTimeout(() => {
-        setError('');
-      }, 3000);
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen ">
-      <div className="w-full max-w-md p-8 space-y-6 bg-gray-900 rounded-lg shadow-md">
+    <div className="flex items-center justify-center min-h-screen bg-gray-100">
+      <div className="w-full max-w-md p-8 space-y-6 bg-white rounded-lg shadow-md">
         <h2 className="text-2xl font-bold text-center">Registrarse</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
@@ -79,4 +96,4 @@ export const Register = () => {
   );
 };
 
-
+ 

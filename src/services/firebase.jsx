@@ -3,12 +3,12 @@ import { getAuth } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
 
 const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_AUTH_DOMAIN",
-  projectId: "YOUR_PROJECT_ID",
-  storageBucket: "YOUR_STORAGE_BUCKET",
-  messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-  appId: "YOUR_APP_ID"
+  apiKey: "AIzaSyAhzDc6YpJBLZPC0OpJABahC-FkLbddnKE",
+  authDomain: "gestor-gastos-personales.firebaseapp.com",
+  projectId: "gestor-gastos-personales",
+  storageBucket: "gestor-gastos-personales.appspot.com",
+  messagingSenderId: "646846571673",
+  appId: "1:646846571673:web:b24e1788c3a164c5dec408"
 };
 
 const app = initializeApp(firebaseConfig);

@@ -16,14 +16,11 @@ export const Login = () => {
       await login(email, password);
       navigate('/dashboard');
     } catch (error) {
-        if (error.code === 'auth/user-not-found') {
-            setError('El usuario no existe. ¿Deseas registrarte?');
-          } else {
-            setError('Error al iniciar sesión. Por favor, verifica tus credenciales.');
-          }
-          setTimeout(() => {
-            setError('');
-          }, 3000);
+      if (error.code === 'auth/user-not-found') {
+        setError('El usuario no existe. ¿Deseas registrarte?');
+      } else {
+        setError('Error al iniciar sesión. Por favor, verifica tus credenciales.');
+      }
     }
   };
 
@@ -59,12 +56,15 @@ export const Login = () => {
             Login
           </button>
           {error && (
-            <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
-              <strong className="font-bold">Error:</strong>
-              <span className="block sm:inline"> {error}</span>
-            </div>
+            <p className="text-red-500">
+              {error}{' '}
+              {error === 'El usuario no existe. ¿Deseas registrarte?' && (
+                <Link to="/register" className="text-blue-500 hover:underline">
+                  Registrar
+                </Link>
+              )}
+            </p>
           )}
-         
         </form>
         <div className="text-sm text-center">
           <Link to="/register" className="text-blue-500 hover:underline">Crear una cuenta</Link>
@@ -74,4 +74,4 @@ export const Login = () => {
   );
 };
 
- 
+
