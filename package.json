@@ -10,6 +10,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@google/generative-ai": "^0.14.1",
+    "axios": "^1.7.2",
     "chart.js": "^4.4.3",
     "daisyui": "^4.12.10",
     "firebase": "^10.12.2",
