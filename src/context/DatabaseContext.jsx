@@ -14,7 +14,7 @@ export function DatabaseProvider({ children }) {
 
   const saveExpenses = async (expenses) => {
     if (currentUser) {
-      await addDoc(collection(db, "expenses"), {
+      await addDoc(collection(db,  `users/${currentUser.uid}/expenses`), {
         ...expenses,
         userId: currentUser.uid,
         createdAt: new Date()
@@ -24,7 +24,7 @@ export function DatabaseProvider({ children }) {
 
   const getExpenses = async () => {
     if (currentUser) {
-      const q = query(collection(db, "expenses"), where("userId", "==", currentUser.uid));
+      const q = query(collection(db, `users/${currentUser.uid}/expenses`));
       const querySnapshot = await getDocs(q);
       return querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
     }
@@ -32,13 +32,13 @@ export function DatabaseProvider({ children }) {
   };
 
   const updateExpense = async (id, updatedExpense) => {
-    await updateDoc(doc(db, "expenses", id), updatedExpense);
+    await updateDoc(doc(db, `users/${currentUser.uid}/expenses`, id), updatedExpense);
   };
 
   const deleteExpense = async (id) => {
-    await deleteDoc(doc(db, "expenses", id));
+    await deleteDoc(doc(db, `users/${currentUser.uid}/expenses`, id));
   };
-
+  
   const value = {
     saveExpenses,
     getExpenses,

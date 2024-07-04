@@ -14,7 +14,7 @@ export const Login = () => {
     setError('');
     try {
       await login(email, password);
-      navigate('/dashboard');
+      navigate('/add-expense');
     } catch (error) {
       if (error.code === 'auth/user-not-found') {
         setError('El usuario no existe. ¿Deseas registrarte?');

@@ -4,6 +4,7 @@ import { useAuth } from '../../context/AuthContext';
 import { useDatabase } from '../../context/DatabaseContext';
 import { GraficoGastos } from '../graficoGastos/GraficoGastos';
 import { Dashboard } from '../Logout';
+import {useNavigate } from 'react-router-dom';
 
 
 export const FormularioGastos = () => {
@@ -20,6 +21,7 @@ export const FormularioGastos = () => {
   const [graficoImage, setGraficoImage] = useState('');
   const { saveExpenses } = useDatabase();
   const { currentUser } = useAuth();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const calcularDiferencia = () => {
@@ -62,6 +64,7 @@ export const FormularioGastos = () => {
       userId: currentUser.uid
     };
     await saveExpenses(datosGasto);
+    navigate('/expenses');
   };
 
   const handleGenerateImage = (base64Image) => {

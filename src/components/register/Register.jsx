@@ -33,7 +33,7 @@ export const Register = () => {
     try {
       await register(email, password);
       console.log("User registered")
-      navigate('/dashboard');
+      navigate('/add-expense');
     } catch (error) {
       if (error.code === 'auth/email-already-in-use') {
         setError('El email ya está en uso.');
