@@ -1,6 +1,6 @@
 import { createContext, useContext } from 'react';
 import { db } from '../services/firebase';
-import { collection, addDoc, getDocs, query, where, doc, updateDoc, deleteDoc } from 'firebase/firestore';
+import { collection, addDoc, getDocs, query, where, getDoc, doc, updateDoc, deleteDoc } from 'firebase/firestore';
 import { useAuth } from './AuthContext';
 
 const DatabaseContext = createContext();
@@ -31,6 +31,15 @@ export function DatabaseProvider({ children }) {
     return [];
   };
 
+  const getExpense = async (id) => {
+    const expenseDoc = await getDoc(doc(db, `users/${currentUser.uid}/expenses`, id));
+    if (expenseDoc.exists()) {
+      return { id: expenseDoc.id, ...expenseDoc.data() };
+    } else {
+      throw new Error('No se encontró el gasto');
+    }
+  };
+
   const updateExpense = async (id, updatedExpense) => {
     await updateDoc(doc(db, `users/${currentUser.uid}/expenses`, id), updatedExpense);
   };
@@ -38,10 +47,11 @@ export function DatabaseProvider({ children }) {
   const deleteExpense = async (id) => {
     await deleteDoc(doc(db, `users/${currentUser.uid}/expenses`, id));
   };
-  
+
   const value = {
     saveExpenses,
     getExpenses,
+    getExpense,
     updateExpense,
     deleteExpense
   };
