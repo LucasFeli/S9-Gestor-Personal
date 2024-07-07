@@ -22,7 +22,7 @@ export const ExpenseDetail = () => {
   }
 
   return (
-    <div className="container mx-auto p-5">
+    <div className="container mx-auto p-5 text-white">
       <h2 className="text-2xl font-bold mb-5">Detalle del Gasto</h2>
       <div className="mb-4 p-4 border rounded-md">
         <h3 className="text-xl font-bold">

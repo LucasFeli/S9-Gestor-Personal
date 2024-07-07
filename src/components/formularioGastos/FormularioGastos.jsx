@@ -3,8 +3,9 @@ import { obtenerConsejosFinancieros } from '../../services/GeminiService';
 import { useAuth } from '../../context/AuthContext';
 import { useDatabase } from '../../context/DatabaseContext';
 import { GraficoGastos } from '../graficoGastos/GraficoGastos';
-import { Dashboard } from '../Logout';
-import {useNavigate } from 'react-router-dom';
+import { Logout } from '../Logout';
+import {useNavigate,Link } from 'react-router-dom';
+import { Timestamp } from 'firebase/firestore';
 
 
 export const FormularioGastos = () => {
@@ -61,7 +62,8 @@ export const FormularioGastos = () => {
       diferencia,
       consejos,
       graficoImage,
-      userId: currentUser.uid
+      userId: currentUser.uid,
+      createdAt: Timestamp.now() 
     };
     await saveExpenses(datosGasto);
     navigate('/expenses');
@@ -73,13 +75,14 @@ export const FormularioGastos = () => {
 
   return (
     <div className="container mx-auto p-5">
-      <h2 className="text-2xl font-bold mb-5">Agregar Gastos</h2>
+       <Logout/>
+      <h2 className="text-2xl font-bold mb-5 text-white">Agregar Gastos</h2>
       <div className="flex flex-col md:flex-row md:space-x-4">
         <div className="md:w-1/2">
           <form onSubmit={handleSubmit}>
             {gastos.map((gasto, index) => (
               <div className="mb-4" key={index}>
-                <label className="block text-gray-700">{gasto.descripcion}</label>
+                <label className="block text-white">{gasto.descripcion}</label>
                 <input
                   type="number"
                   name="cantidad"
@@ -91,7 +94,7 @@ export const FormularioGastos = () => {
               </div>
             ))}
             <div className="mb-4">
-              <label className="block text-gray-700">Moneda</label>
+              <label className="block text-white">Moneda</label>
               <select
                 name="moneda"
                 className="w-full px-3 py-2 border border-gray-300 rounded-md"
@@ -103,7 +106,7 @@ export const FormularioGastos = () => {
               </select>
             </div>
             <div className="mb-4">
-              <label className="block text-gray-700">Diferencia</label>
+              <label className="block text-white">Diferencia</label>
               <input
                 type="number"
                 className="w-full px-3 py-2 border border-gray-300 rounded-md"
@@ -111,12 +114,18 @@ export const FormularioGastos = () => {
                 readOnly
               />
             </div>
+            <div className="flex items-center justify-between">
             <button
               type="submit"
               className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
             >
-              Enviar Gastos
+              Obtener Consejo
             </button>
+            <div className="text-sm text-center">
+          <Link to="/expenses" className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">Ver Lista de Consultas</Link>
+            </div>
+            
+        </div>
           </form>
           {consejos && (
             <div className="mt-5">
@@ -140,10 +149,10 @@ export const FormularioGastos = () => {
           )}
         </div>
         <div className="md:w-1/2">
-          <GraficoGastos datos={gastos.filter(gasto => gasto.descripcion !== 'Ingresos Totales')} onGenerateImage={handleGenerateImage} />
+          <GraficoGastos  datos={gastos.filter(gasto => gasto.descripcion !== 'Ingresos Totales')} onGenerateImage={handleGenerateImage} />
         </div>
       </div>
-      <Dashboard/>
+      
     </div>
   );
 };

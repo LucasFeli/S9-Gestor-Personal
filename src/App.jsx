@@ -2,7 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import { HomePage } from "./pages/HomePage";
 import { Login } from "./components/login/Login";
 import { Register } from "./components/register/Register";
-import { Dashboard } from "./components/Logout";
+import { Logout } from "./components/Logout";
 import { FormularioGastos } from "./components/formularioGastos/FormularioGastos";
 import {ExpenseList} from "./components/ExpenseList/ExpenseList";
 import { ExpenseDetail } from "./components/ExpenseDetail/ExpenseDetail";
@@ -20,7 +20,7 @@ function App() {
         <Route path="/expenses" element={<PrivateRoute><ExpenseList/></PrivateRoute>}></Route>
         <Route path="/add-expense" element={<PrivateRoute><FormularioGastos/></PrivateRoute>}></Route>
         <Route path="/expense/:id" element={<PrivateRoute><ExpenseDetail/></PrivateRoute>}></Route>
-        <Route path="/dashboard" element={<PrivateRoute><Dashboard /></PrivateRoute>} />
+        <Route path="/logout" element={<PrivateRoute><Logout /></PrivateRoute>} />
       </Routes>
     </>
   );
