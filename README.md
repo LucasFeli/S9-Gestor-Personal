@@ -112,14 +112,14 @@ export default app;
 
 ## Descripción de las Rutas
 
-/: Ruta principal que carga el componente HomePage.
-/login: Ruta para el componente de inicio de sesión Login.
-/register: Ruta para el componente de registro Register.
-/expenses: Ruta protegida que carga el componente ExpenseList dentro de PrivateRoute.
-/add-expense: Ruta protegida que carga el componente FormularioGastos dentro de PrivateRoute.
+/: Ruta principal que carga el componente HomePage.<br>
+/login: Ruta para el componente de inicio de sesión Login.<br>
+/register: Ruta para el componente de registro Register.<br>
+/expenses: Ruta protegida que carga el componente ExpenseList dentro de PrivateRoute.<br>
+/add-expense: Ruta protegida que carga el componente FormularioGastos dentro de PrivateRoute.<br>
 /expense/
-: Ruta protegida que carga el componente ExpenseDetail dentro de PrivateRoute, donde :id es el identificador del gasto.
-/logout: Ruta protegida que carga el componente Logout dentro de PrivateRoute.
+: Ruta protegida que carga el componente ExpenseDetail dentro de PrivateRoute, donde :id es el identificador del gasto.<br>
+/logout: Ruta protegida que carga el componente Logout dentro de PrivateRoute.<br>
 
 | Path                      | Componente            | Permisos                 | Comportamiento                                                     |
 | ------------------------- | -------------------- | --------------------------- | ------------------------------------------------------------ |
