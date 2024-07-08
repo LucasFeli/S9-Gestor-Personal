@@ -16,9 +16,37 @@
 ## Tecnologías Utilizadas
 
 - React
-- Firebase (Autenticación y Firestore)
+- Firebase (Autenticación, Firestore-Database)
 - React Router
 - React context
+- Gemini AI API, para los consejos financieros
+- daisyUI + Tailwind CSS para el diseño de la pagina
+
+## Instalación
+
+Para instalar y ejecutar esta aplicación localmente, sigue los siguientes pasos:
+
+1. Clona el repositorio:
+   ```bash
+   git clone https://github.com/LucasFeli/S9-Gestor-Personal.git
+   ```
+2. Navega al directorio del proyecto:
+
+   - cd Consultor-de-gastos-personales
+
+3. Instala las dependencias:
+    ```sh
+     npm install
+    ```
+
+## Ejecución
+Para ejecutar la aplicación en modo de desarrollo, usa el siguiente comando:
+```sh
+npm run dev
+```
+
+- La aplicación estará disponible en http://localhost:5173.
+
 
 ##  Configuracion de Firebase
 
@@ -47,3 +75,57 @@ export default app;
 ```
 
 <br>
+
+## Estructura del Proyecto
+
+├── assets/<br>
+├── components/<br>
+│ ├── ExpenseDetail/<br>
+│ │ └── ExpenseDetail.jsx<br>
+│ ├── ExpenseList/<br>
+│ │ └── ExpenseList.jsx<br>
+│ ├── formularioGastos/<br>
+│ │ └──FormularioGastos.jsx<br>
+│ ├── graficoGastos/<br>
+│ │ └──GraficoGastos.jsx<br>
+│ ├── login/<br>
+│ │ └──Login.jsx<br>
+│ ├── modal/<br>
+│ │ └──Modal.jsx<br>
+│ ├── privateRoute/<br>
+│ │ └──PrivateRoute.jsx<br>
+│ ├── register/<br>
+│ │ └──Register.jsx<br>
+│ └── Logout.jsx<br>
+├── context/<br>
+│ ├── AuthContext.jsx<br>
+│ └── DatabaseContext.jsx<br>
+├── pages/<br>
+│    └──HomePage.jsx<br>
+├── services/<br>
+│ ├── firebase.jsx<br>
+│ └── GeminiService.jsx<br>
+├── App.css<br>
+├── App.jsx<br>
+├── index.css<br>
+└── main.jsx<br>
+
+## Descripción de las Rutas
+
+/: Ruta principal que carga el componente HomePage.
+/login: Ruta para el componente de inicio de sesión Login.
+/register: Ruta para el componente de registro Register.
+/expenses: Ruta protegida que carga el componente ExpenseList dentro de PrivateRoute.
+/add-expense: Ruta protegida que carga el componente FormularioGastos dentro de PrivateRoute.
+/expense/
+: Ruta protegida que carga el componente ExpenseDetail dentro de PrivateRoute, donde :id es el identificador del gasto.
+/logout: Ruta protegida que carga el componente Logout dentro de PrivateRoute.
+
+| Path                      | Componente            | Permisos                 | Comportamiento                                                     |
+| ------------------------- | -------------------- | --------------------------- | ------------------------------------------------------------ |
+| `/`                       | Pagina de inicio            | público `<Route>`            | Página de inicio                                                    |
+| `/register`                 | Pagina de Registro           | público `<Route>`    | Formulario de Registro, link to login,  |
+| `/login`                  | Pagina inciar sesion           | público `<Route>`     | Login form, link to register,  |
+| `/expenses`               | Lista de gastos    | solo usuario `<PrivateRoute>`  | Página ingresar informacion sobre ingresos y gastos
+| `/add-expense`           | Formulario para agregar gastos      | solo usuario  `<PrivateRoute>`  |Formulario ingresar informacion sobre ingresos y gastos y redirige a la lista de gastos , una vez que se ha agregado los gastos y el consejo |
+| `/expense/:id`           | Pagina de detalle de gastos y consejos   | solo usuario `<PrivateRoute>`  | Página con los detalles de gastos y consejos, contiene un boton, para regresar al listado de gastos|

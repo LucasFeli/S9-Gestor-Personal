@@ -11,13 +11,12 @@ const generationConfig = {
   temperature: 0.7,
   topP: 1,
   topK: 150,
-  maxOutputTokens: 150,
+  maxOutputTokens: 200,
   responseMimeType: "text/plain",
 };
 
 export const obtenerConsejosFinancieros = async (datosGasto) => {
   const prompt = generarPrompt(datosGasto);
-  console.log(prompt);
 
   try {
     const chatSession = model.startChat({
@@ -31,24 +30,35 @@ export const obtenerConsejosFinancieros = async (datosGasto) => {
     });
 
     const result = await chatSession.sendMessage(prompt);
-    console.log(result.response.text())
+
     return result.response.text();
   } catch (error) {
-    console.error('Error al obtener los consejos financieros:', error.response?.data || error.message);
-    throw new Error('No se pudieron obtener los consejos financieros');
+    console.error(
+      "Error al obtener los consejos financieros:",
+      error.response?.data || error.message
+    );
+    throw new Error("No se pudieron obtener los consejos financieros");
   }
 };
 
 const generarPrompt = (datosGasto) => {
   const { gastos, moneda, diferencia } = datosGasto;
-  console.log(datosGasto)
+  console.log(datosGasto);
   return `
     Basado en los siguientes datos de gastos, proporciona algunos consejos financieros:
-    Ingresos Totales: ${gastos.find(g => g.descripcion === 'Ingresos Totales').cantidad} ${moneda}
-    Entretenimiento: ${gastos.find(g => g.descripcion === 'Entretenimiento').cantidad} ${moneda}
-    Gastos domiciliarios: ${gastos.find(g => g.descripcion === 'Gastos domiciliarios').cantidad} ${moneda}
-    Transporte: ${gastos.find(g => g.descripcion === 'Transporte').cantidad} ${moneda}
-    Otros: ${gastos.find(g => g.descripcion === 'Otros').cantidad} ${moneda}
+    Ingresos Totales: ${
+      gastos.find((g) => g.descripcion === "Ingresos Totales").cantidad
+    } ${moneda}
+    Entretenimiento: ${
+      gastos.find((g) => g.descripcion === "Entretenimiento").cantidad
+    } ${moneda}
+    Gastos domiciliarios: ${
+      gastos.find((g) => g.descripcion === "Gastos domiciliarios").cantidad
+    } ${moneda}
+    Transporte: ${
+      gastos.find((g) => g.descripcion === "Transporte").cantidad
+    } ${moneda}
+    Otros: ${gastos.find((g) => g.descripcion === "Otros").cantidad} ${moneda}
     Diferencia: ${diferencia} ${moneda}
   `;
 };

@@ -1,32 +1,34 @@
-import { useState } from 'react';
-import { useAuth } from '../../context/AuthContext';
-import { Link, useNavigate } from 'react-router-dom';
+import { useState } from "react";
+import { useAuth } from "../../context/AuthContext";
+import { Link, useNavigate } from "react-router-dom";
 
 export const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const { login } = useAuth();
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError('');
+    setError("");
     try {
       await login(email, password);
-      navigate('/add-expense');
+      navigate("/add-expense");
     } catch (error) {
-      if (error.code === 'auth/user-not-found') {
-        setError('El usuario no existe. ¿Deseas registrarte?');
+      if (error.code === "auth/user-not-found") {
+        setError("El usuario no existe. ¿Deseas registrarte?");
       } else {
-        setError('Error al iniciar sesión. Por favor, verifica tus credenciales.');
+        setError(
+          "Error al iniciar sesión. Por favor, verifica tus credenciales."
+        );
       }
     }
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <div className="w-full max-w-md p-8 space-y-6 bg-white rounded-lg shadow-md">
+    <div className="flex items-center justify-center bg-gradient-to-b from-gray-900 to-purple-900 min-h-screen">
+      <div className="w-full max-w-md p-8 space-y-6 bg-gradient-to-b from-gray-900 to-purple-900 text-white">
         <h2 className="text-2xl font-bold text-center">Iniciar Sesión</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
@@ -40,7 +42,9 @@ export const Login = () => {
             />
           </div>
           <div>
-            <label className="block mb-1 text-sm font-semibold">Password:</label>
+            <label className="block mb-1 text-sm font-semibold">
+              Password:
+            </label>
             <input
               type="password"
               value={password}
@@ -48,6 +52,7 @@ export const Login = () => {
               required
               className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-blue-200"
             />
+            <p>la contraseña debe tener minimo 8 caracteres</p>
           </div>
           <button
             type="submit"
@@ -57,8 +62,8 @@ export const Login = () => {
           </button>
           {error && (
             <p className="text-red-500">
-              {error}{' '}
-              {error === 'El usuario no existe. ¿Deseas registrarte?' && (
+              {error}{" "}
+              {error === "El usuario no existe. ¿Deseas registrarte?" && (
                 <Link to="/register" className="text-blue-500 hover:underline">
                   Registrar
                 </Link>
@@ -67,11 +72,11 @@ export const Login = () => {
           )}
         </form>
         <div className="text-sm text-center">
-          <Link to="/register" className="text-blue-500 hover:underline">Crear una cuenta</Link>
+          <Link to="/register" className="text-blue-500 hover:underline">
+            Crear una cuenta
+          </Link>
         </div>
       </div>
     </div>
   );
 };
-
-
