@@ -2,7 +2,7 @@
 
 ## Description
 
-- ____ es una aplicación que ayuda a los usuarios a gestionar sus finanzas personales, hacer un seguimiento de sus gastos e ingresos, y obtener recomendaciones personalizadas para ahorrar dinero. La aplicación también proporciona gráficos y análisis para ayudar a los usuarios a entender mejor sus hábitos financieros.
+- Gestor de Finanzas Personales es una aplicación que ayuda a los usuarios a gestionar sus finanzas personales, hacer un seguimiento de sus gastos e ingresos, y obtener recomendaciones personalizadas para ahorrar dinero. La aplicación también proporciona gráficos y análisis para ayudar a los usuarios a entender mejor sus hábitos financieros.
 
 
 
