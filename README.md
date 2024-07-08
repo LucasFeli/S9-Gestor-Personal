@@ -123,9 +123,29 @@ export default app;
 
 | Path                      | Componente            | Permisos                 | Comportamiento                                                     |
 | ------------------------- | -------------------- | --------------------------- | ------------------------------------------------------------ |
-| `/`                       | Pagina de inicio            | público `<Route>`            | Página de inicio                                                    |
+| `/`                       | Pagina de inicio            | público `<Route>`            | Página de inicio
+| `/how-it-works`           | Pagina de explicacion de la pagina            | público `<Route>`            | Pagina de explicacion de la pagina                                                     |
 | `/register`                 | Pagina de Registro           | público `<Route>`    | Formulario de Registro, link to login,  |
 | `/login`                  | Pagina inciar sesion           | público `<Route>`     | Login form, link to register,  |
 | `/expenses`               | Lista de gastos    | solo usuario `<PrivateRoute>`  | Página ingresar informacion sobre ingresos y gastos
 | `/add-expense`           | Formulario para agregar gastos      | solo usuario  `<PrivateRoute>`  |Formulario ingresar informacion sobre ingresos y gastos y redirige a la lista de gastos , una vez que se ha agregado los gastos y el consejo |
 | `/expense/:id`           | Pagina de detalle de gastos y consejos   | solo usuario `<PrivateRoute>`  | Página con los detalles de gastos y consejos, contiene un boton, para regresar al listado de gastos|
+
+
+## Capturas de la pagina
+
+- Pagina de explicacion de la pagina
+
+![alt text](src/assets/explicacion.png)
+
+- Pagina del formulario de la pagina
+
+![alt text](src/assets/formPage.png)
+
+- Pagina de lista de los gastos
+
+![alt text](src/assets/listPage.png)
+
+- Pagina de detalle del gasto 
+
+![alt text](src/assets/detailPage.png)
